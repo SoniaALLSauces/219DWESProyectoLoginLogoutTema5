@@ -40,7 +40,7 @@
 	<main class="main">
             <section>
                 <h2><a href="../proyectoDWES/indexProyectoDWES.php">DWES</a> - Tema 5. Desarrollo de Aplicaciones Web utilizando Código Embebido</h2>
-                <h3>Proyecto Login Logout Tema 5 - 03/12/2021</h3>            
+                <h3>Proyecto Login Logout Tema 5</h3>            
                 
             </section>
             <section class="button">
@@ -50,7 +50,7 @@
         <footer class="footer">
             <nav class="fnav">
                 <ul>
-                    <li class="ftexto"><a href="indexProyectoDWES.php">&copy 2020-21. Sonia Anton LLanes</a></li>
+                    <li class="ftexto"><a href="indexProyectoDWES.php">&copy 2020-21. Sonia Anton LLanes - v.2 - 03/12/2021</a></li>
                     <li>
                         
                         <a class="maxMedia" href="doc/curriculum_SALL.pdf" target="_blank"><img src="webroot/images/CV.png" alt="imagen_CV"></a>
