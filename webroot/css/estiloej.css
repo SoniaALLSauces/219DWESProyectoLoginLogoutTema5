@@ -1,0 +1,158 @@
+/*
+Author: Sonia Anton Llanes
+Created on: 29-septiembre-2020
+Last modification: 29-septiembre-2020
+CSS Index General Segundo Curso del Módulo Desarrollo de Aplicaciones Web
+*/
+
+* { box-sizing: border-box; margin:0px; padding:0px;}
+ul, ol {list-style: none; }
+a{text-decoration: none; color:#000; }
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+
+/* Tamaño y Posicion de los Elementos con Grid */
+.container{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 8%;
+    grid-template-columns:1% auto 1%;
+    grid-template-areas:
+        "main main main"
+        ". footer .";
+}
+
+.main{
+    grid-area: main;
+}
+.footer{
+    grid-area: footer;
+}
+
+
+/* Tamaño y posicion dentro del elemto */
+h2 img{
+    width: 4%;
+    text-align: left;
+}
+table{
+    width: 80%;
+}
+.trvariables{
+    width: 100%;
+    height: 50px;
+}
+.td1{
+    width: 20%;
+}
+.tdvariables{
+    width: 40%;
+}
+.td3{
+    width: 40%;
+}
+.fnav ul li{
+    display: inline-block; 
+    width: 45%;
+}
+.fnav li img{
+    height: 7vh;
+    width: auto;
+}
+
+/* Border, Margin y Padding */
+.h2, h2, h3{
+    margin: 1% 1%;
+}
+h5{
+    padding-left: 50px;
+}
+.php{
+    margin: 1% 3%;
+    border: 1px solid #BF2411;
+    padding: 1%;
+}
+p{
+    margin-left: 2%;
+}
+.label{
+    margin: 1%;
+}
+input{
+    margin-left: 1%;
+}
+.table{
+    margin: 10vh auto;
+}
+.tableVariable{
+    margin: 2vh auto;
+}
+th{
+    margin: 5% auto;
+    border: none;
+}
+.button{
+    padding: 3% 8%; 
+}
+.button>*{
+    padding: 6% 12%; 
+    border: 2px solid #BF2411;
+    border-radius: 50% 20%;
+}
+.trvariables>*{
+    margin: 5px auto;
+    padding: 5px 30px;
+}
+.tdvariables{
+    border-left: 1px solid #BF2411;
+    border-bottom: 1px solid #BF2411;
+}
+.footer{
+    border-top: 2px solid #BF2411;
+}
+
+
+/* Background */
+.tr:nth-child(2n){
+    background: lightpink;
+}
+.footer{
+    background-color: white;
+}
+
+/* Estilo del texto */
+.h2, h2{
+    color: #bb1212;
+    font-family: 'Dancing Script', cursive;
+    font-size: 32px;
+    font-weight: bolder;
+    vertical-align: middle;
+}
+h3{
+    font-family: 'Secular One', sans-serif;
+    font-size: 20px;
+}
+h4{
+    font-size: 20px;
+}
+.centrado{
+    text-align: center;
+}
+.button{
+    font-size: 1.3rem;
+}
+.footer{
+    text-align: center;
+}
+.fnav ul li{
+    vertical-align: middle;
+}
+.ftexto{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
