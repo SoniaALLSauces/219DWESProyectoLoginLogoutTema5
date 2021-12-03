@@ -6,21 +6,21 @@
 
 
     /* Creo la base de datos DAW2xxxDBDepartamentos */
-        create database if not exists DB219DWESProyectoTema5;
+        create database if not exists DB219DWESLoginLogoutTema5;
 
     /* Creo el usuario */
-        create user if not exists 'user219DWESProyectoTema5'@'%' identified by 'paso';
+        create user if not exists 'user219DWESLoginLogoutTema5'@'%' identified by 'paso';
 
     /* Damos permisos al usuario sobre la base de datos DB219DWESProyectoTema5 */
-        grant all privileges on DB219DWESProyectoTema5.* to 'user219DWESProyectoTema5'@'%';
+        grant all privileges on DB219DWESLoginLogoutTema5.* to 'user219DWESLoginLogoutTema5'@'%';
 
     /* Pongo en uso la base de datos creada en script DB219DWESProyectoTema5 */
-        use DB219DWESProyectoTema5;  
+        use DB219DWESLoginLogoutTema5;  
 
     /* Creo la tabla Usuarios si no existe */
         create table if not exists T01_Usuario(  
             T01_CodUsuario varchar(8) primary key not null,
-            T01_Password varchar(8),
+            T01_Password varchar(255),
             T01_DescUsuario varchar(255),
             T01_NumConexiones int default 0,
             T01_FechaHoraUltimaConexion timestamp,

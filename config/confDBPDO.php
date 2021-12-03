@@ -12,8 +12,8 @@
 //        define ('PASSWORD', 'P@ssw0rd');
         
     /* Constantes BD Entorno Desarrollo Local */
-        define ('HOST', 'mysql:host=daw219.sauces.local;dbname=DB219DWESProyectoTema5');
-        define ('USER', 'user219DWESProyectoTema5');
+        define ('HOST', 'mysql:host=daw219.sauces.local;dbname=DB219DWESLoginLogoutTema5');
+        define ('USER', 'user219DWESLoginLogoutTema5');
         define ('PASSWORD', 'paso');
         
         

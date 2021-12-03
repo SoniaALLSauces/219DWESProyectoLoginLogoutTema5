@@ -5,10 +5,8 @@
 
 
     /* Pongo en uso la base de datos creada en script creaDAW2SALDBDepartamentos */
-        use DB219DWESProyectoTema5;  
+        use DB219DWESLoginLogoutTema5;  
 
-        /* Inserto las tuplas a la tabla Usuarios*/
-        INSERT INTO Usuario(CodDepartamento,DescDepartamento,FechaBaja,VolumenNegocio) VALUES
 
     /* Inserto las tuplas a la tabla Departamentos*/
         INSERT INTO T02_Departamento(T02_CodDepartamento,T02_DescDepartamento,T02_VolumenDeNegocio,T02_FechaBajaDepartamento) VALUES

@@ -19,6 +19,19 @@
         <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+        <style>
+            .button{text-align: center;}
+            .button>*{width: 150px;
+                      height: 80px;
+                      margin: 50px;
+                      padding: 20px;
+                      border: 2px solid #BF2411;
+                      border-radius: 50% 20%;
+                      background: #ecaaa1;
+                      font-size: 1.5rem;
+                      font-family: 'Secular One', sans-serif;
+                      font-weight: bolder;}
+        </style>
     </head>
     <body class="container">
 	<header class="header">
@@ -30,8 +43,8 @@
                 <h3>Proyecto Login Logout Tema 5</h3>            
                 
             </section>
-            <section>
-                <button><a href="Login.php">Iniciar Sesion</a></button>
+            <section class="button">
+                <button><a href="codigoPHP/login.php">LOG IN</a></button>
             </section>
         </main>
         <footer class="footer">
