@@ -1,0 +1,5 @@
+ErrorDocument 403 /errors/indexError.html
+ErrorDocument 404 /errors/indexError.html
+ErrorDocument 500 /errors/indexError.html
+
+DirectoryIndex indexProyectoLoginLogoutTema5.php

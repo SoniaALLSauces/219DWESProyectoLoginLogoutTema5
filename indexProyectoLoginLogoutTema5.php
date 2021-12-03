@@ -50,7 +50,9 @@
         <footer class="footer">
             <nav class="fnav">
                 <ul>
-                    <li class="ftexto"><a href="indexProyectoDWES.php">&copy 2020-21. Sonia Anton LLanes</a></li>
+
+                    <li class="ftexto"><a href="indexProyectoDWES.php">&copy 2020-21. Sonia Anton LLanes - v.2 - 03/12/2021</a></li>
+
                     <li>
                         
                         <a class="maxMedia" href="doc/curriculum_SALL.pdf" target="_blank"><img src="webroot/images/CV.png" alt="imagen_CV"></a>
