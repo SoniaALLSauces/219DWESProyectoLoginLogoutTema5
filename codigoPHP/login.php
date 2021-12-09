@@ -105,7 +105,7 @@
                                             $miDB ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //y siempre lanzo excepción utilizando manejador propio PDOException cuando se produce un error
                                             //$codigoDepartamento= $_REQUEST['codDepartamento'];  //variable donde guardo el valor codigo del formulario
                                             $sqlUsuario = <<<EOD
-                                                               SELECT T01_FechaHoraUltimaConexion FROM T01_Usuario WHERE 
+                                                               SELECT * FROM T01_Usuario WHERE 
                                                                T01_CodUsuario=:usuario AND 
                                                                T01_Password=:password;
                                                              EOD;
@@ -115,12 +115,14 @@
                                             );
                                             $consultaUsuario = $miDB -> prepare($sqlUsuario);  //Con consulta preparada, preparo la consulta
                                             $consultaUsuario ->execute($parametros);
+                                            $consulta = $consultaUsuario ->fetchObject();
                                         //Buscamos en la tabla si algun registro coindice con el usuario-contraseña introducida
                                             if ($consultaUsuario->rowCount()==0){  //si no encuentra ningún registro (usuario y contraseña)
                                                 $aErrores['usuario']="no encontrado usuario";
                                                 $entradaOK = false;
                                             } else{
-                                                $fechaHoraUltimaConexion = $consultaUsuario;
+                                                $codUsuario = $consulta -> T01_CodUsuario;
+                                                $fechaHoraUltimaConexion = $consulta -> T01_FechaHoraUltimaConexion;
                                             }
                                         }
                                         catch (PDOException $excepcion){  //codigo si se produce error utilizando PDOException
@@ -153,14 +155,26 @@
                                                           UPDATE T01_Usuario SET 
                                                             T01_NumConexiones = T01_NumConexiones+1 ,
                                                             T01_FechaHoraUltimaConexion=:ultimaconexion
-                                                          WHERE T01_CodUsuario=:usuario;
+                                                          WHERE T01_CodUsuario=:codUsuario;
                                                         EOD;
+                                        $fechaAhora = new DateTime();
+                                        $ahora = $fechaAhora->getTimestamp();
                                         $parametros = array (
-                                                ':ultimaconexion' => time(),
-                                                ':usuario' => $aRespuestas['usuario']
+                                                ':ultimaconexion' => $ahora,
+                                                ':codUsuario' => $aRespuestas['usuario']
                                             );
                                         $consultaUsuario = $conexion -> prepare($sqlUpdate);  //Con consulta preparada, preparo la consulta
                                         $consultaUsuario ->execute($parametros);
+                                        
+                                        /* INICIO SESION Y GUARDO el usuario y fecha ultima conexion */
+                                            session_start();   // inicio la sesion
+                                            $_SESSION['UsuarioDAW219AppLoginLogout']= $codUsuario;   //guardo el usuario logeado
+                                            $_SESSION['FechaHoraUltimaConexion']= $fechaHoraUltimaConexion;   //guardo la fecha de la ultima conexión con el select antes del update
+
+                                        /* REDIRIJO AL FICHERO programa.php */
+                                        header('Location: programa.php');  //redirige a la fichero programa.php
+                                        //exit;
+                                        
                                         }  
                                         catch (PDOException $error){  //Excepcion: si se producen errores los gestionamos con PDOException
                                             echo "<p>Error".$error->getMessage()."</p>";
@@ -169,16 +183,7 @@
                                         finally {  //Desconexión: siempre se finaliza la conexión a la base de datos
                                             unset($conexion);
                                         }
-                                        
-                                /* INICIO SESION Y GUARDO el usuario y fecha ultima conexion */
-                                    session_start();   // inicio la sesion
-                                    $_SESSION['UsuarioDAW219AppLoginLogout']= $aRespuestas['usuario'];   //guardo el usuario logeado
-                                    $_SESSION['FechaHoraUltimaConexion']= $fechaHoraUltimaConexion;   //guardo el usuario logeado
-                                    
-                                        
-                                header('Location: programa.php');  //redirige a la fichero programa.php
-//                              exit;
-                                
+  
                             }
                             
                             else{//Si las respuestas no son correctas o aun no se ha pulsado enviar      

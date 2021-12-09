@@ -20,11 +20,11 @@ a{text-decoration: none; color:#000; }
     height: 100vh;
     display: grid;
     grid-template-rows: 10% auto 8%;
-    grid-template-columns:1% 5% auto 1%;
+    grid-template-columns:5% auto 1%;
     grid-template-areas:
-        "header header header header"
-        ". . main ."
-        ". footer footer .";
+        "header header header"
+        ". main ."
+        ". footer .";
 }
 
 .header{
@@ -32,8 +32,6 @@ a{text-decoration: none; color:#000; }
 }
 .main{
     grid-area: main;
-    justify-self: center;
-    overflow-x: scroll;
 }
 .footer{
     grid-area: footer;
@@ -48,14 +46,7 @@ a{text-decoration: none; color:#000; }
 .h1 a{
     height: 100%;
 }
-.menu ul li{
-    display: block;
-    height: 10vh;
-    width: 100%;
-}
-.ref{
-    width: 100%;
-}
+
 .tdimg{
     width: 40px;
 }
@@ -129,15 +120,7 @@ h3{
 .centrado{
     text-align: center;
 }
-.menu{
-    width: 100%;
-}
-.menu li{
-    font-family: 'Indie Flower', cursive;
-    font-weight: bold;
-    font-size: 30px;
-    text-align: center;
-}
+
 .button{
     text-align: center;
 }
@@ -166,17 +149,6 @@ h3{
 
 
 /* Hover */
-.menu li:hover{
-    width: 100%;
-    border-bottom: 1px solid #BF2411;
-    border-left: 1px solid #BF2411;
-    background-color: #BF2411;
-    color: white;
-}
-.menu li a:hover{
-    width: 100%;
-    color: white;
-}
 .tr:hover{
     background: linear-gradient(90deg, #BF2411, white);
 }
