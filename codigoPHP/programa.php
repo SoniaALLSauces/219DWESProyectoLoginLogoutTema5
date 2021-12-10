@@ -20,11 +20,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
         <style>
-            .datos{margin: 20px;}
             .botones{position: relative;
-                     margin-right: 10px;}
+                     float: right;
+                     right: 10px;}
             button{width: 100px;
-                   height: 50px;}
+                   height: 50px;
+                   }
+            .login{position: relative;
+                   top: 50px;}
+            .datos{position: relative;
+                   top: 50px;
+                   margin: 20px;}
         </style>
     </head>
     <body class="container">
@@ -37,10 +43,9 @@
                 <button><a href='../indexProyectoLoginLogoutTema5.php'>Log Out</a></button>
             </section>
             
-            <section>
-                <h2 class="centrado"><a href="../../219DWESProyectoTema5/indexProyectoTema5.php" style="border-bottom: 2px solid black">TEMA 5:</a>
-                Desarrollo de Aplicaciones Web utilizando Código Embebido</h2>
-                <h2 class="centrado" style="color:black">Proyecto Login Logout Tema 5</h2>         
+            <section class="login">
+                
+                <h2 class="centrado">Proyecto Login Logout Tema 5</h2>         
             </section>
             
             <section class="datos">
@@ -54,8 +59,9 @@
                  */
                 
                 /*Variables que necesito para el saludo*/
-                    $usuario= $_SESSION['Usuario'];
-                    $fechaHoraUltimaConexion = $_SESSION['FechaHolaUltimaConexion'];
+                    session_start();
+                    $usuario= $_SESSION['UsuarioDAW219AppLoginLogout'];
+                    $fechaHoraUltimaConexion = $_SESSION['FechaHoraUltimaConexion'];
                 
                 /* Importamos archivos necesarios */
                         require_once '../config/confDBPDO.php';  //archivo que contiene los parametros de la conexion
@@ -65,12 +71,20 @@
                             $miDB ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //y siempre lanzo excepción utilizando manejador propio PDOException cuando se produce un error
                             //$codigoDepartamento= $_REQUEST['codDepartamento'];  //variable donde guardo el valor codigo del formulario
                             $sqlUsuario = <<<EOD
-                                               SELECT T01_DescUsuario FROM T01_Usuario WHERE 
-                                               T01_CodUsuario={$usuario};
+                                               SELECT * FROM T01_Usuario WHERE 
+                                               T01_CodUsuario='{$usuario}';
                                              EOD;
                             $consultaUsuario = $miDB -> prepare($sqlUsuario);  //Con consulta preparada, preparo la consulta
                             $consultaUsuario ->execute();
-                        
+                            $consulta = $consultaUsuario ->fetchObject();
+                                $descUsuario = $consulta -> T01_DescUsuario;
+                                $numConexiones = $consulta -> T01_NumConexiones;
+                            
+                            echo "<h3>HOLA $descUsuario</h3>";
+                            echo "<p>Es la $numConexiones vez que se conecta.</p>";
+                            $ultimaConexion = new DateTime();
+                            $ultimaConexionFormat = $ultimaConexion-> setTimestamp($fechaHoraUltimaConexion) -> format ('d-m-Y H:i:s');
+                            echo "<p>Se conectó por ultima vez el: $ultimaConexionFormat </p>";
                         }
                         catch (PDOException $excepcion){  //codigo si se produce error utilizando PDOException
                             echo "<p>Error: ".$excepcion->getCode()."</p>";  //getCode() nos devuelve el codigo del error que salte
@@ -79,9 +93,6 @@
                         finally {  
                             unset($miDB);  //finalizamos conexion con database
                         }
-                
-                    echo "<h3>HOLA $consultaUsuario</h3>";
-                    echo "<p>Su usuario y contraseña se han introducido correctamente </p>";
                 
                 ?>
                 

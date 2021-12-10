@@ -51,13 +51,13 @@
             <nav class="fnav">
                 <ul>
 
-                    <li class="ftexto"><a href="indexProyectoDWES.php">&copy 2020-21. Sonia Anton LLanes - v.2 - 03/12/2021</a></li>
+                    <li class="ftexto"><a href="../index.html">&copy 2020-21. Sonia Anton LLanes - v.2 - 03/12/2021</a></li>
 
                     <li>
                         
                         <a class="maxMedia" href="doc/curriculum_SALL.pdf" target="_blank"><img src="webroot/images/CV.png" alt="imagen_CV"></a>
                         <a class="maxMedia" href=""><img src="webroot/images/linkedin.png" alt="imagen_linkedIn"></a>
-                        <a class="maxMedia" href="https://github.com/SoniaALLSauces" target="_blank"><img src="webroot/images/github.png" alt="imagen_github"></a>
+                        <a class="maxMedia" href="https://github.com/SoniaALLSauces/219DWESProyectoLoginLogoutTema5.git" target="_blank"><img src="webroot/images/github.png" alt="imagen_github"></a>
                     </li>
                 </ul>
             </nav>

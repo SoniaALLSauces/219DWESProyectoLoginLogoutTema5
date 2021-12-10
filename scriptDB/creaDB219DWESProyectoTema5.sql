@@ -23,7 +23,7 @@
             T01_Password varchar(255),
             T01_DescUsuario varchar(255),
             T01_NumConexiones int default 0,
-            T01_FechaHoraUltimaConexion timestamp,
+            T01_FechaHoraUltimaConexion int,
             T01_Perfil enum('usuario','administrador') default 'usuario',
             T01_ImagenUsuario mediumblob) engine=innodb;
 
