@@ -1,3 +1,23 @@
+<?php
+
+    /* 
+     * Author: Sonia Antón Llanes
+     * Created on: 30-noviembre-2021
+     * Ejercicio: ventana programa que se muestra cuando el login (usuario y contraseña) es correcto
+     */
+
+        /* Importamos archivos necesarios */
+            require_once '../config/confDBPDO.php';  //archivo que contiene los parametros de la conexion 
+
+        /* INICIO LA SESION */
+            session_start();
+        
+        /*Variables que necesito para el saludo*/
+            $usuario= $_SESSION['UsuarioDAW219AppLoginLogout'];
+            $fechaHoraUltimaConexion = $_SESSION['FechaHoraUltimaConexion'];
+        
+?>
+
 <!DOCTYPE html>
 
 <!-- Author: Sonia Antón Llanes -->
@@ -57,15 +77,7 @@
                  * Created on: 30-noviembre-2021
                  * Ejercicio: ventana que se muestra cuando el login es correcto
                  */
-                
-                /*Variables que necesito para el saludo*/
-                    session_start();
-                    $usuario= $_SESSION['UsuarioDAW219AppLoginLogout'];
-                    $fechaHoraUltimaConexion = $_SESSION['FechaHoraUltimaConexion'];
-                
-                /* Importamos archivos necesarios */
-                        require_once '../config/confDBPDO.php';  //archivo que contiene los parametros de la conexion
-                    
+
                         try{
                             $miDB = new PDO (HOST, USER, PASSWORD);  //establezco conexión con objeto PDO 
                             $miDB ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //y siempre lanzo excepción utilizando manejador propio PDOException cuando se produce un error
@@ -81,10 +93,14 @@
                                 $numConexiones = $consulta -> T01_NumConexiones;
                             
                             echo "<h3>HOLA $descUsuario</h3>";
-                            echo "<p>Es la $numConexiones vez que se conecta.</p>";
-                            $ultimaConexion = new DateTime();
-                            $ultimaConexionFormat = $ultimaConexion-> setTimestamp($fechaHoraUltimaConexion) -> format ('d-m-Y H:i:s');
-                            echo "<p>Se conectó por ultima vez el: $ultimaConexionFormat </p>";
+                            if ($numConexiones==1){
+                                echo "<p>Es la PRIMERA vez que se conecta.</p>";
+                            } else{
+                                echo "<p>Es la $numConexiones vez que se conecta.</p>";
+                                $ultimaConexion = new DateTime();
+                                $ultimaConexionFormat = $ultimaConexion-> setTimestamp($fechaHoraUltimaConexion) -> format ('d-m-Y H:i:s');
+                                echo "<p>Se conectó por ultima vez el: $ultimaConexionFormat </p>";
+                            }
                         }
                         catch (PDOException $excepcion){  //codigo si se produce error utilizando PDOException
                             echo "<p>Error: ".$excepcion->getCode()."</p>";  //getCode() nos devuelve el codigo del error que salte
