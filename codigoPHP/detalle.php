@@ -1,3 +1,17 @@
+<?php
+
+    /* 
+     * Author: Sonia Antón Llanes
+     * Created on: 29-noviembre-2021
+     * LOGIN: ventana para iniciar sesion de un usuario guardado en una tabla 'usuarios' de la base de datos
+     */
+
+        /* Inicio la Sesion */
+            session_start();
+
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="es">
@@ -12,19 +26,20 @@
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
         <style>
+            .h2{color: #bb1212;
+                font-family: 'Dancing Script', cursive;
+                font-size: 32px;
+                font-weight: bolder;}
             .tableVariable{width: 80vw;}
-            .tableVariable>*{height: 10px;}
-            table{width: 50%;
-                  margin: 20px auto;}
+            .tableVariable>td{height: 10px;}
+            
             .login{width: 50%;
                    text-align: center;
                    border: 1px solid black;
                    margin-top: 50px;
                    padding: 30px;}
             th{border: none;}
-            .td{width: 25%;
-                height: 60px;
-                border: 1px solid gray;
+            .td{border: 1px solid gray;
                 padding: 2px 10px;}
             div{width: 90%;
                 margin: 8px;}
@@ -51,60 +66,53 @@
         
         <main class="main">
         
-            <h2 class="centrado"><a href="../../219DWESProyectoTema5/indexProyectoTema5.php" style="border-bottom: 2px solid black">TEMA 5:</a>
-            Desarrollo de Aplicaciones Web utilizando Código Embebido</h2>
-            <h2 class="centrado" style="color:black">Proyecto Login Logout Tema 5</h2>
-        
-        
+            <h2 class="h2 centrado"><a href="../../proyectoDWES/indexProyectoDWES.php" style="border-bottom: 2px solid black; text-decoration: none;">TEMA 5:</a>
+                Proyecto Login Logout Tema 5</h2>
+
             <div>
-
-                <?php
-
-                /* 
-                 * Author: Sonia Antón Llanes
-                 * Created on: 29-noviembre-2021
-                 * LOGIN: ventana para iniciar sesion de un usuario guardado en una tabla 'usuarios' de la base de datos
-                 */
-                
-                    /* Inicio la Sesion */
-                        session_start();
-                
-                    /* $_SERVER, $_COOKIE, $_SESSION */
-                        //$_SESSION
-                ?>
-                    <table class="tableVariable">
-                        <tr>
-                            <td><h4>Variable $_SESSION</h4></td>
-                        </tr>
-                    </table>
-                    <table class="tableVariable">
-                <?php
+                    <!-- $_SESSION -->
+                <table class="tableVariable">
+                    <tr>
+                        <td class="nombreVariable"><h4>Variable $_SESSION</h4></td>
+                    </tr>
+                </table>
+                <table class="tableVariable">
+                    <?php
                         foreach ($_SESSION as $elemento => $valor) {
                             echo "<tr>";
                             print_r("<td class=\"td\">$elemento</td> <td class=\"td\">$valor</td>");
                             echo "</tr>";
                         }
-                ?>
-                    </table>
-                        
-                        <!-- $_SERVER -->
-                    <table class="tableVariable">
-                        <tr>
-                            <td><h4>Variable $_SERVER</h4></td>
-                        </tr>
-                    </table>
-                    <table class="tableVariable">
-                <?php
+                    ?>
+                </table>
+
+                    <!-- $_SERVER -->
+                <table class="tableVariable">
+                    <tr>
+                        <td class="nombreVariable"><h4>Variable $_SERVER</h4></td>
+                    </tr>
+                </table>
+                <table class="tableVariable">
+                    <?php
                         foreach ($_SERVER as $elemento => $valor) {
                             echo "<tr>";
                             print_r("<td class=\"td\">$elemento</td> <td class=\"td\">$valor</td>");
                             echo "</tr>";
                         }
+                echo "</table>";        
+                    ?>
                 
+                    
+                <table class="tableVariable">
+                    <tr>
+                        <td class="nombreVariable"><h4>PHPINFO()</h4></td>
+                    </tr>
+                </table>
+                    <?php
                     /* Mostramos phpinfo() */            
                         phpinfo();
 
-                ?>
+                    ?>
             </div>
         </main>
         <footer class="footer">
