@@ -32,7 +32,6 @@
                 font-weight: bolder;}
             .tableVariable{width: 80vw;}
             .tableVariable>td{height: 10px;}
-            
             .login{width: 50%;
                    text-align: center;
                    border: 1px solid black;
@@ -63,11 +62,14 @@
         </style>
     </head>
     <body class="container">
-        
-        <main class="main">
-        
-            <h2 class="h2 centrado"><a href="../../proyectoDWES/indexProyectoDWES.php" style="border-bottom: 2px solid black; text-decoration: none;">TEMA 5:</a>
+        <main class="main" style="background:white;">
+            <div class="divh2">
+                <a class="volver" href="../indexProyectoLoginLogoutTema5.php">
+                    <img src="../webroot/images/volver.png">
+                </a>
+                <h2 class="centrado"><a href="../../proyectoDWES/indexProyectoDWES.php" style="border-bottom: 2px solid black; color:black;">DWES</a> -
                 Proyecto Login Logout Tema 5</h2>
+            </div>
 
             <div>
                     <!-- $_SESSION -->

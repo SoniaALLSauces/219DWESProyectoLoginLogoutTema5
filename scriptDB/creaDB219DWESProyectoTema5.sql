@@ -9,7 +9,9 @@
         create database if not exists DB219DWESLoginLogoutTema5;
 
     /* Creo el usuario */
-        create user if not exists 'user219DWESLoginLogoutTema5'@'%' identified by 'paso';
+--         create user if not exists 'user219DWESLoginLogoutTema5'@'%' identified by 'paso';
+        /* Usuario en maquina virtual casa */
+        create user if not exists 'user219DWESLoginLogoutTema5'@'%' identified by 'P@ssw0rd';  
 
     /* Damos permisos al usuario sobre la base de datos DB219DWESProyectoTema5 */
         grant all privileges on DB219DWESLoginLogoutTema5.* to 'user219DWESLoginLogoutTema5'@'%';

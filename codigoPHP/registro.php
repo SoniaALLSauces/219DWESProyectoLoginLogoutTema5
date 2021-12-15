@@ -2,25 +2,19 @@
 
     /* 
      * Author: Sonia Antón Llanes
-     * Created on: 29-noviembre-2021
+     * Created on: 14-diciembre-2021
      * Last Modify: 14-diciembre-2021
      * LOGIN: ventana para iniciar sesion de un usuario guardado en una tabla 'usuarios' de la base de datos
      */
 
         /* Si pulsamos el boton volver */
-            if (isset($_REQUEST['volver'])){
+            if (isset($_REQUEST['cancelar'])){
                 header('Location: ../indexProyectoLoginLogoutTema5.php');  //redirige a la fichero registro.php
                 exit;
             }
 
-        /* Si pulsamos el boton register */
-            if (isset($_REQUEST['register'])){
-                header('Location: registro.php');  //redirige a la fichero registro.php
-                exit;
-            }
-        
-            
-        /* LOGIN: Importamos archivos necesarios */
+
+        /* REGISTRO: Importamos archivos necesarios */
             require_once '../config/confDBPDO.php';  //archivo que contiene los parametros de la conexion
             require_once '../core/libreriaValidacion.php'; //libreria Validación para errores
 
@@ -33,19 +27,22 @@
         /* ARRAY DE ERRORES Y ENTRADAS DEL FORMULARIO*/
             $aErrores = array(     //Array para guardar los errores del formulario
                 'usuario' => null,   //E inicializo cada elemento
+                'descripcion' => null,
                 'password' => null
                 );
             $aRespuestas = array(     //Array para guardar las entradas del formulario correctas
                 'usuario' => null,   //E inicializo cada elemento
+                'descripcion' => null,
                 'password' => null
                 );
 
         /* VALIDACIÓN de cada entrada del formulario con la libreria de validación que importamos
          * y VALIDACIÓN con la base de datos de que usuario y contraseña es correcta */
-            if (isset($_REQUEST['login'])){  //Si se ha pulsado el boton enviar
+            if (isset($_REQUEST['register'])){  //Si se ha pulsado el boton enviar
                 //Valido cada campo y si hay algun error lo guardo en el array aErrores
-                    $aErrores['usuario']= validacionFormularios::comprobarAlfabetico($_REQUEST['usuario'], 8, 1, OBLIGATORIO);
-                    $aErrores['password']= validacionFormularios::validarPassword($_REQUEST['password'], 8, 1, 1, OBLIGATORIO);
+                    $aErrores['usuario']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['usuario'], 8, 1, OBLIGATORIO);
+                    $aErrores['descripcion']= validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], 50, 1, OBLIGATORIO);
+                    $aErrores['password']= validacionFormularios::validarPassword($_REQUEST['password'], 8, 4, 1, OBLIGATORIO);
                 
                     foreach ($aErrores as $campo => $error){  //Recorro array errores y compruebo si se ha incluido algún error
                         if ($error!=null){         //si es distinto de null
@@ -53,32 +50,18 @@
                         }
                         else {                     //si no hay errores de entrada compruebo que el usuario no exista
                             try{
-                                /* GUARDO EN EL ARRAY $aRespuestas LOS DATOS INTRODUCIDOS EN EL FORMULARIO */
-                                $aRespuestas['usuario']= $_REQUEST['usuario'];
-                                $aRespuestas['password']= $_REQUEST['password'];
-                                /* COMPRUEBO CON LA BASE DE DATOS QUE SON CORRECTOS USUARIO Y CONTRASEÑA */
                                 $miDB = new PDO (HOST, USER, PASSWORD);  //establezco conexión con objeto PDO 
                                 $miDB ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //y siempre lanzo excepción utilizando manejador propio PDOException cuando se produce un error
                                 //$codigoDepartamento= $_REQUEST['codDepartamento'];  //variable donde guardo el valor codigo del formulario
-                                $sqlUsuario = <<<EOD
-                                                   SELECT * FROM T01_Usuario WHERE 
-                                                   T01_CodUsuario=:usuario AND 
-                                                   T01_Password=:password;
-                                                 EOD;
-                                $parametros = array (
-                                    ':usuario' => $aRespuestas['usuario'],
-                                    ':password' => hash('sha256',($aRespuestas['usuario'].$aRespuestas['password']))
-                                );
-                                $consultaUsuario = $miDB -> prepare($sqlUsuario);  //Con consulta preparada, preparo la consulta
-                                $consultaUsuario ->execute($parametros);
-                                $consulta = $consultaUsuario ->fetchObject();
-                            //Buscamos en la tabla si algun registro coindice con el usuario-contraseña introducida
-                                if ($consultaUsuario->rowCount()==0){  //si no encuentra ningún registro (usuario y contraseña)
-                                    $aErrores['usuario']= "usuario no encontrado";
-                                    $entradaOK = false;
-                                } else{
-                                    $codUsuario = $consulta -> T01_CodUsuario;
-                                    $fechaHoraUltimaConexion = $consulta -> T01_FechaHoraUltimaConexion;
+                                $sql = <<<EOD
+                                            SELECT T01_CodUsuario FROM T01_Usuario
+                                            where T01_CodUsuario="{$_REQUEST['usuario']}";
+                                            EOD;
+                                $consulta = $miDB -> prepare($sql);  //Con consulta preparada, preparo la consulta
+                                $consulta ->execute();
+                                if($consulta->rowCount() > 0){
+                                    $aErrores['usuario']= 'Usuario ya existe';  //añadimos mensaje al array en eCodDepartamento
+                                    $entradaOK = false;                         //si el codigo ya existe guardamos el error y entradaOK es false      
                                 }
                             }
                             catch (PDOException $excepcion){  //codigo si se produce error utilizando PDOException
@@ -98,34 +81,30 @@
         /* FORMULARIO Y RESULTADO una vez enviado y con entradas correctas*/
             if($entradaOK){  //Si todas las entradas son correctas
                     $aRespuestas['usuario']= $_REQUEST['usuario'];
-                    $aRespuestas['password']= $_REQUEST['password'];
+                    $aRespuestas['descripcion']= $_REQUEST['descripcion'];
+                    $aRespuestas['password']= $_REQUEST['usuario'].$_REQUEST['password'];
 
-                /* ESTABLEZCO CONEXIÓN Y MODIFICO FECHA DE LA ULTIMA CONEXIÓN Y NUMERO DE CONEXIONES */
-                    try {                                           //Conexión: establezco la conexión y el código que quiero realizar
+                /* ESTABLEZCO CONEXIÓN Y NUEVO REGISTRO DE USUARIO */
+                    try {                                           //Conexión try-catch controlando errores
                         $conexion = new PDO (HOST, USER, PASSWORD); // Establezco la CONEXIÓN a la base de datos con los parametros de la conexión  
                         $conexion ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //Tratamiento de errores de la clase PDO, con los atributos ATTR_ERRMODE y ERRMODE_EXCEPTION
 
-                        //Actualizo los datos: fecha ultima conexion y numero de conexiones del usuario en la tabla
-                        $sqlUpdate = <<<EOD
-                                          UPDATE T01_Usuario SET 
-                                            T01_NumConexiones = T01_NumConexiones+1 ,
-                                            T01_FechaHoraUltimaConexion=:ultimaconexion
-                                          WHERE T01_CodUsuario=:codUsuario;
-                                        EOD;
+                        //Creamos objeto DateTime() para guardar el timestamp de la primera conexion
                         $fechaAhora = new DateTime();
                         $ahora = $fechaAhora->getTimestamp();
-                        $parametros = array (
-                                ':ultimaconexion' => $ahora,
-                                ':codUsuario' => $aRespuestas['usuario']
-                            );
-                        $consultaUsuario = $conexion -> prepare($sqlUpdate);  //Con consulta preparada, preparo la consulta
-                        $consultaUsuario ->execute($parametros);
+                        //query insert para guardar el nuevo usuario
+                        $sqlNewUsu = <<<EOD
+                                            INSERT INTO T01_Usuario(T01_CodUsuario, T01_Password, T01_DescUsuario, T01_NumConexiones, T01_FechaHoraUltimaConexion) VALUES
+                                            ('{$aRespuestas['usuario']}', SHA2('{$aRespuestas['password']}',256), '{$aRespuestas['descripcion']}', 1, {$ahora});
+                                        EOD;
+                        $inserto = $conexion -> prepare($sqlNewUsu);  //Con consulta preparada, preparo la consulta
+                        $inserto ->execute();
 
-                        /* INICIO SESION Y GUARDO el usuario y fecha ultima conexion */
+                        /* INICIO SESION Y GUARDO el usuario */
                             session_start();   // inicio la sesion
-                            $_SESSION['UsuarioDAW219AppLoginLogout']= $codUsuario;   //guardo el usuario logeado
-                            $_SESSION['FechaHoraUltimaConexion']= $fechaHoraUltimaConexion;   //guardo la fecha de la ultima conexión con el select antes del update
-
+                            $_SESSION['UsuarioDAW219AppLoginLogout']= $aRespuestas['usuario'];   //guardo el usuario logeado
+                            $_SESSION['FechaHoraUltimaConexion']= null;
+                            
                         /* REDIRIJO AL FICHERO programa.php */
                         header('Location: programa.php');  //redirige a la fichero programa.php
                         exit;
@@ -174,23 +153,23 @@
                                 .dato, .error{width: 100%;
                                               height: 15px;
                                               font-size: 18px;}
-                                .datoUsu>input{width: 80%;
+                                .datoUsu>input{width: 100%;
                                                height: 30px;
                                                font-size: 20px;
                                                border: none;
                                                border-bottom: 1px solid black;
                                                padding: 0 10px;}
-                                #login, #register{width: 85%;
-                                                border: 2px solid #BF2411;
-                                                background: #ecaaa1;
-                                                margin: 5px;
-                                                padding: 5px 20px;
-                                                font-size: 2vw;}
-                                .vacio{height: 20px;}
+                                #register, #cancelar{width: 85%;
+                                                    border: 2px solid #BF2411;
+                                                    background: #ecaaa1;
+                                                    margin: 5px;
+                                                    padding: 5px 20px;
+                                                    font-size: 2vw;}
                                 .ast{color: #bb1212;}
                             </style>
                         </head>
                         <body class="container">
+
                             <main class="main">
                                 <div class="divh2">
                                     <a class="volver" href="../indexProyectoLoginLogoutTema5.php">
@@ -200,17 +179,34 @@
                                     Proyecto Login Logout Tema 5</h2>
                                 </div>
 
-                                <div class="div">
+                                <div  class="div">
                                     <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                                         <table class="login">
                                             <tr>
-                                                <th colspan="2"><h3>Formulario LogIN</h3></th>
+                                                <th colspan="2"><h3>Nuevo Usuario</h3></th>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     <div class="dato"><label for="LbUsuario">Usuario <span class="ast">*</span></label></div>
                                                     <div class="datoUsu"><input type="text" name="usuario" id="LbUsuario"
                                                            placeholder=""></div>
+                                                    <div class="error"><?php
+                                                        if ($aErrores['usuario'] != NULL) { //si hay errores muestra el mensaje
+                                                            echo "<span style=\"color:red;\">".$aErrores['usuario']."</span>"; //aparece el mensaje de error que tiene el array aErrores
+                                                        }
+                                                     ?></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="dato"><label for="LbDescripcion">Nombre y Apellidos <span class="ast">*</span></label></div>
+                                                    <div class="datoUsu"><input type="text" name="descripcion" id="LbDescripcion"
+                                                           placeholder=""></div>
+                                                    <div class="error"><?php
+                                                        if ($aErrores['descripcion'] != NULL) { //si hay errores muestra el mensaje
+                                                            echo "<span style=\"color:red;\">".$aErrores['descripcion']."</span>"; //aparece el mensaje de error que tiene el array aErrores
+                                                        }
+                                                     ?></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -218,22 +214,17 @@
                                                     <div class="dato"><label for="LbPassword">Contraseña  <span class="ast">*</span></label></div>
                                                     <div class="datoUsu"><input type="password" name="password" id="LbPassword"
                                                            placeholder=""></div>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
                                                     <div class="error"><?php
-                                                            if ($aErrores['usuario']!=NULL || $aErrores['password']!=NULL) { //si hay errores muestra el mensaje
-                                                                echo "<span style=\"color:red;\">usuario y/o contraseña incorrecto</span>"; //aparece el mensaje de error que tiene el array aErrores
-                                                            }
-                                                         ?></div>
+                                                        if ($aErrores['password'] != NULL) { //si hay errores muestra el mensaje
+                                                            echo "<span style=\"color:red;\">".$aErrores['password']."</span>"; //aparece el mensaje de error que tiene el array aErrores
+                                                        }
+                                                     ?></div>
                                                 </td>
                                             </tr>
-                                            <tr><td class="vacio"></td></tr>
-                                            <tr>
-                                                <th><input id="login" name="login" type="submit" value="Iniciar Sesion"></th>
+                                            <tr class="iniciar">
                                                 <th><input id="register" name="register" type="submit" value="Registrarse"></th>
+                                                <th><input id="cancelar" name="cancelar" type="submit" value="Cancelar"></th>
+                                                <!--<th><a class="volver" href="../indexProyectoLoginLogoutTema5.php">Volver</a></th>-->
                                             </tr>
                                         </table>
                                     </form>

@@ -38,11 +38,9 @@
             <h1 class="h1"><a href="../index.html" style="color: white">Desarrollo de Aplicaciones Web</a></h1>
 	</header>
 	<main class="main">
-            <section>
-                <h2><a href="../proyectoDWES/indexProyectoDWES.php">DWES</a> - Tema 5. Desarrollo de Aplicaciones Web utilizando Código Embebido</h2>
-                <h3>Proyecto Login Logout Tema 5</h3>            
-                
-            </section>
+            <h2 class="centrado" style="color:black"><a href="../../proyectoDWES/indexProyectoDWES.php" style="border-bottom: 2px solid black">DWES</a> -
+            Tema 5: Desarrollo de Aplicaciones Web utilizando Código Embebido</h2>
+            <h2 class="centrado">Proyecto Login Logout Tema 5</h2>
             <section class="button">
                 <button><a href="codigoPHP/login.php">LOG IN</a></button>
             </section>
