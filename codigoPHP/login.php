@@ -44,7 +44,7 @@
          * y VALIDACIÓN con la base de datos de que usuario y contraseña es correcta */
             if (isset($_REQUEST['login'])){  //Si se ha pulsado el boton enviar
                 //Valido cada campo y si hay algun error lo guardo en el array aErrores
-                    $aErrores['usuario']= validacionFormularios::comprobarAlfabetico($_REQUEST['usuario'], 8, 1, OBLIGATORIO);
+                    $aErrores['usuario']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['usuario'], 8, 1, OBLIGATORIO);
                     $aErrores['password']= validacionFormularios::validarPassword($_REQUEST['password'], 8, 1, 1, OBLIGATORIO);
                 
                     foreach ($aErrores as $campo => $error){  //Recorro array errores y compruebo si se ha incluido algún error

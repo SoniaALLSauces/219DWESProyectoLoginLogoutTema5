@@ -9,7 +9,7 @@
 
         /* Si pulsamos el boton volver */
             if (isset($_REQUEST['cancelar'])){
-                header('Location: ../indexProyectoLoginLogoutTema5.php');  //redirige a la fichero registro.php
+                header('Location: login.php');  //redirige a la fichero login.php
                 exit;
             }
 

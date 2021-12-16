@@ -64,7 +64,7 @@
     <body class="container">
         <main class="main" style="background:white;">
             <div class="divh2">
-                <a class="volver" href="../indexProyectoLoginLogoutTema5.php">
+                <a class="volver" href="programa.php">
                     <img src="../webroot/images/volver.png">
                 </a>
                 <h2 class="centrado"><a href="../../proyectoDWES/indexProyectoDWES.php" style="border-bottom: 2px solid black; color:black;">DWES</a> -
