@@ -18,54 +18,54 @@
         
 ?>
 
-<!DOCTYPE html>
 
-<!-- Author: Sonia Antón Llanes -->
-<!-- Created on: 30-noviembre-2021 -->
-<!-- Programa.php Proyecto Login Logout Tema 5 -->
+<!DOCTYPE html>
 
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Sonia Anton Llanes - programa Login Logout Tema 5</title>
+        <title>Sonia Anton Llanes - Tema 5: Proyecto LoginLogout - Login</title>
         <meta name="author" content="Sonia Antón Llanes">
         <meta name="description" content="Proyecto DAW2">
         <meta name="keywords" content="">
-        <link href="../webroot/css/newcss.css" rel="stylesheet" type="text/css">
-        <link href="webroot/images/mariposa_vintage.png" rel="icon" type="image/png">	
-        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <link href="../webroot/css/estiloej.css" rel="stylesheet" type="text/css">
+        <link href="../webroot/images/mariposa_vintage.png" rel="icon" type="image/png">
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
         <style>
+            .subrayado{border-bottom: 2px solid #bb1212;
+                       padding-bottom: 10px;}
             .botones{position: relative;
                      float: right;
                      right: 10px;}
-            button{width: 100px;
-                   height: 50px;
-                   }
-            .login{position: relative;
-                   top: 50px;}
-            .datos{position: relative;
-                   top: 50px;
-                   margin: 20px;}
+            button{width: 13vw;
+                   height: 60px;
+                   border: 2px solid #BF2411;
+                   background: #ecaaa1;
+                   margin: 5px 10px;
+                   padding: 5px 20px;
+                   font-size: 1.8vw;
+                   vertical-align: middle;}
+            div{width: 90%;
+                margin: 8px;}
+            .saludo{margin: 100px;}
+            
         </style>
     </head>
     <body class="container">
-	<header class="header">
-            <h1 class="h1"><a href="../../index.html" style="color: white">Desarrollo de Aplicaciones Web</a></h1>
-	</header>
-	<main class="main">
-            <section class="botones">
+        <main class="main">
+            <div class="divh2">
+                <a class="volver" href="../indexProyectoLoginLogoutTema5.php">
+                    <img src="../webroot/images/volver.png">
+                </a>
+                <h2 class="centrado"><a href="../../proyectoDWES/indexProyectoDWES.php" style="border-bottom: 2px solid black; color:black;">DWES</a> -
+                Proyecto Login Logout Tema 5</h2>
+            </div>
+
+            <section class="botones buttonForm">
+                <button><a href="editarPerfil.php">Editar Perfil</a></button>
                 <button><a href="detalle.php">Detalle</a></button>
                 <button><a href='../indexProyectoLoginLogoutTema5.php'>Log Out</a></button>
-            </section>
-            
-            <section class="login">
-                
-                <h2 class="centrado">Proyecto Login Logout Tema 5</h2>         
             </section>
             
             <section class="datos">
@@ -81,7 +81,6 @@
                         try{
                             $miDB = new PDO (HOST, USER, PASSWORD);  //establezco conexión con objeto PDO 
                             $miDB ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //y siempre lanzo excepción utilizando manejador propio PDOException cuando se produce un error
-                            //$codigoDepartamento= $_REQUEST['codDepartamento'];  //variable donde guardo el valor codigo del formulario
                             $sqlUsuario = <<<EOD
                                                SELECT * FROM T01_Usuario WHERE 
                                                T01_CodUsuario='{$usuario}';
@@ -92,15 +91,17 @@
                                 $descUsuario = $consulta -> T01_DescUsuario;
                                 $numConexiones = $consulta -> T01_NumConexiones;
                             
-                            echo "<h3>HOLA $descUsuario</h3>";
-                            if ($numConexiones==1){
-                                echo "<p>Es la PRIMERA vez que se conecta.</p>";
-                            } else{
-                                echo "<p>Es la $numConexiones vez que se conecta.</p>";
-                                $ultimaConexion = new DateTime();
-                                $ultimaConexionFormat = $ultimaConexion-> setTimestamp($fechaHoraUltimaConexion) -> format ('d-m-Y H:i:s');
-                                echo "<p>Se conectó por ultima vez el: $ultimaConexionFormat </p>";
-                            }
+                            echo "<div class='saludo'>";
+                                echo "<h3>HOLA $descUsuario</h3>";
+                                if ($numConexiones==1){
+                                    echo "<p>Es la PRIMERA vez que se conecta.</p>";
+                                } else{
+                                    echo "<p>Es la ".$numConexiones."ª vez que se conecta.</p>";
+                                    $ultimaConexion = new DateTime();
+                                    $ultimaConexionFormat = $ultimaConexion-> setTimestamp($fechaHoraUltimaConexion) -> format ('d-m-Y H:i:s');
+                                    echo "<p>Se conectó por ultima vez el: $ultimaConexionFormat </p>";
+                                }
+                            echo "</div>";
                         }
                         catch (PDOException $excepcion){  //codigo si se produce error utilizando PDOException
                             echo "<p>Error: ".$excepcion->getCode()."</p>";  //getCode() nos devuelve el codigo del error que salte

@@ -35,9 +35,17 @@ a{text-decoration: none; color:#000; }
 
 
 /* Tamaño y posicion dentro del elemto */
-h2 img{
-    width: 4%;
-    text-align: left;
+.divh2{
+    width: 100%;
+}
+.volver>img{
+    width: 100px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+.div{
+    width: 98%;
 }
 table{
     width: 80%;
@@ -65,6 +73,14 @@ table{
 }
 
 /* Border, Margin y Padding */
+.divh2{
+    border-bottom: 2px solid #BF2411;
+    margin: 0px;
+    padding: 5px 0px;
+}
+.divh2>a{
+    border: 0;
+}
 .h2, h2, h3{
     margin: 1% 1%;
 }
@@ -117,6 +133,19 @@ th{
 
 
 /* Background */
+.main{
+    background-image: url("../images/background-gradient.jpg");
+    background-size: 100%;
+}
+.divh2, .divh2>a{
+    background: white;
+}
+h2{
+    background: white;
+}
+.login{
+    background: white;
+}
 .tr:nth-child(2n){
     background: lightpink;
 }
@@ -125,12 +154,15 @@ th{
 }
 
 /* Estilo del texto */
-.h2, h2{
+.divh2>h2{
     color: #bb1212;
     font-family: 'Dancing Script', cursive;
     font-size: 32px;
     font-weight: bolder;
     vertical-align: middle;
+}
+.divh2>a{
+    text-decoration: none;
 }
 h3{
     font-family: 'Secular One', sans-serif;
@@ -156,3 +188,8 @@ h4{
     font-weight: bolder;
 }
 
+/* Hover */
+.buttonForm input:hover{
+    background-color:  green;
+    color: white;
+}

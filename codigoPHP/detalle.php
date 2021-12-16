@@ -32,7 +32,6 @@
                 font-weight: bolder;}
             .tableVariable{width: 80vw;}
             .tableVariable>td{height: 10px;}
-            
             .login{width: 50%;
                    text-align: center;
                    border: 1px solid black;
@@ -43,31 +42,19 @@
                 padding: 2px 10px;}
             div{width: 90%;
                 margin: 8px;}
-            .dato, .error{width: 100%;
-                          height: 15px;
-                          font-size: 18px;}
-            .datoUsu>input{width: 100%;
-                           height: 30px;
-                           font-size: 20px;
-                           border: none;
-                           border-bottom: 1px solid black;
-                           padding: 0 10px;}
-            #login, .volver{width: 50%;
-                             border: 1px solid black;
-                             margin: 5px;
-                             padding: 5px 20px;
-                             font-size: 1.1rem;
-                             background: lightgrey;}
             .button{width: 100%;}
             .ast{color: #bb1212;}
         </style>
     </head>
     <body class="container">
-        
-        <main class="main">
-        
-            <h2 class="h2 centrado"><a href="../../proyectoDWES/indexProyectoDWES.php" style="border-bottom: 2px solid black; text-decoration: none;">TEMA 5:</a>
+        <main class="main" style="background:white;">
+            <div class="divh2">
+                <a class="volver" href="programa.php">
+                    <img src="../webroot/images/volver.png">
+                </a>
+                <h2 class="centrado"><a href="../../proyectoDWES/indexProyectoDWES.php" style="border-bottom: 2px solid black; color:black;">DWES</a> -
                 Proyecto Login Logout Tema 5</h2>
+            </div>
 
             <div>
                     <!-- $_SESSION -->
