@@ -160,18 +160,18 @@
                                 .dato, .error{width: 100%;
                                               height: 15px;
                                               font-size: 18px;}
-                                .datoUsu>input{width: 100%;
+                                .datoUsu>input{width: 80%;
                                                height: 30px;
                                                font-size: 20px;
                                                border: none;
                                                border-bottom: 1px solid black;
                                                padding: 0 10px;}
-                                #login, .volver{width: 50%;
-                                                 border: 1px solid black;
-                                                 margin: 5px;
-                                                 padding: 5px 20px;
-                                                 font-size: 1.1rem;
-                                                 background: lightgrey;}
+                                #login, #register, .volver{width: 80%;
+                                                           margin: 5px;
+                                                           padding: 5px 20px;
+                                                           font-size: 1.1rem;
+                                                           border: 2px solid #BF2411;
+                                                           background: #ecaaa1;}
                                 .ast{color: #bb1212;}
                             </style>
                         </head>
@@ -179,9 +179,9 @@
 
                             <main class="main">
 
-                                <h2 class="centrado"><a href="../../219DWESProyectoTema5/indexProyectoTema5.php" style="border-bottom: 2px solid black">TEMA 5:</a>
+                                <h2 class="centrado" style="color:black"><a href="../../proyectoDWES/indexProyectoDWES.php" style="color:#bb1212;">DWES </a>-
                                 Desarrollo de Aplicaciones Web utilizando Código Embebido</h2>
-                                <h2 class="centrado" style="color:black">Proyecto Login Logout Tema 5</h2>
+                                <h2 class="centrado">Proyecto Login Logout Tema 5</h2>
 
                                 <div>
                                     <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -217,6 +217,7 @@
                                         <table class="iniciar">
                                             <tr>
                                                 <th><input id="login" name="login" type="submit" value="Iniciar Sesion"></th>
+                                                <th><input id="register" name="register" type="submit" value="Nuevo Registro"></th>
                                                 <th><a class="volver" href="../indexProyectoLoginLogoutTema5.php">Volver</a></th>
                                             </tr>
                                         </table>
@@ -242,116 +243,3 @@
             <?php
             }
             ?>
-
-
-
-
-<!DOCTYPE html>
-
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <title>Sonia Anton Llanes - Ejercicio 00</title>
-        <meta name="author" content="Sonia Antón Llanes">
-        <meta name="description" content="Proyecto DAW2">
-        <meta name="keywords" content="">
-        <link href="../webroot/css/estiloej.css" rel="stylesheet" type="text/css">
-        <link href="../webroot/images/mariposa_vintage.png" rel="icon" type="image/png">
-        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
-        <style>
-            table{width: 50%;
-                  margin: 20px auto;}
-            .login{width: 50%;
-                   text-align: center;
-                   border: 1px solid black;
-                   margin-top: 50px;
-                   padding: 30px;}
-            th{border: none;}
-            .td{width: 25%;
-                height: 60px;
-                border: 1px solid gray;
-                padding: 2px 10px;}
-            div{width: 90%;
-                margin: 8px;}
-            .dato, .error{width: 100%;
-                          height: 15px;
-                          font-size: 18px;}
-            .datoUsu>input{width: 100%;
-                           height: 30px;
-                           font-size: 20px;
-                           border: none;
-                           border-bottom: 1px solid black;
-                           padding: 0 10px;}
-            #login, .volver{width: 50%;
-                             border: 1px solid black;
-                             margin: 5px;
-                             padding: 5px 20px;
-                             font-size: 1.1rem;
-                             background: lightgrey;}
-            .ast{color: #bb1212;}
-        </style>
-    </head>
-    <body class="container">
-        
-        <main class="main">
-        
-            <h2 class="centrado"><a href="../../219DWESProyectoTema5/indexProyectoTema5.php" style="border-bottom: 2px solid black">TEMA 5:</a>
-            Desarrollo de Aplicaciones Web utilizando Código Embebido</h2>
-            <h2 class="centrado" style="color:black">Proyecto Login Logout Tema 5</h2>
-        
-            <div>
-                <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                    <table class="login">
-                        <tr>
-                            <th><h3>Formulario LogIN</h3></th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="dato"><label for="LbUsuario">Usuario <span class="ast">*</span></label></div>
-                                <div class="datoUsu"><input type="text" name="usuario" id="LbUsuario"
-                                       placeholder="introducir usuario"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="dato"><label for="LbPassword">Contraseña  <span class="ast">*</span></label></div>
-                                <div class="datoUsu"><input type="password" name="password" id="LbPassword"
-                                       placeholder="introducir contraseña"></div>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="error"><?php
-                                        if ($aErrores['usuario']!=NULL || $aErrores['password']!=NULL) { //si hay errores muestra el mensaje
-                                            echo "<span style=\"color:red;\">Introduzca usuario y contraseña correctas</span>"; //aparece el mensaje de error que tiene el array aErrores
-                                        }
-                                     ?></div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="iniciar">
-                        <tr>
-                            <th><input id="login" name="login" type="submit" value="Iniciar Sesion"></th>
-                            <th><a class="volver" href="../indexProyectoLoginLogoutTema5.php">Volver</a></th>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </main>
-        <footer class="footer">
-            <nav class="fnav">
-                <ul>
-                    <li class="ftexto"><a href="../../index.html">&copy 2020-21. Sonia Anton LLanes</a></li>
-                    <li>
-                        
-                        <a class="maxMedia" href="doc/curriculum_SALL.pdf" target="_blank"><img src="../webroot/images/CV.png" alt="imagen_CV"></a>
-                        <a class="maxMedia" href=""><img src="../webroot/images/linkedin.png" alt="imagen_linkedIn"></a>
-                        <a class="maxMedia" href="https://github.com/SoniaALLSauces" target="_blank"><img src="../webroot/images/github.png" alt="imagen_github"></a>
-                    </li>
-                </ul>
-            </nav>
-        </footer>   
-    </body>
-</html>
