@@ -17,6 +17,7 @@
         /* REGISTRO: Importamos archivos necesarios */
             require_once '../config/confDBPDO.php';  //archivo que contiene los parametros de la conexion
             require_once '../core/libreriaValidacion.php'; //libreria Validación para errores
+            require_once '../core/idiomas.php';  //importamos archivo de idioma
 
         /* VARIABLES: */
             $entradaOK = true;  //Variable que indica que todo va bien
@@ -183,11 +184,11 @@
                                     <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                                         <table class="login">
                                             <tr>
-                                                <th colspan="2"><h3>Nuevo Usuario</h3></th>
+                                                <th colspan="2"><h3><?php echo $aIdiomas[$_COOKIE['idioma']]['nuevoUsu']; ?></h3></th>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <div class="dato"><label for="LbUsuario">Usuario <span class="ast">*</span></label></div>
+                                                    <div class="dato"><label for="LbUsuario"><?php echo $aIdiomas[$_COOKIE['idioma']]['usuario']; ?> <span class="ast">*</span></label></div>
                                                     <div class="datoUsu"><input type="text" name="usuario" id="LbUsuario"
                                                            placeholder=""></div>
                                                     <div class="error"><?php
@@ -199,7 +200,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <div class="dato"><label for="LbDescripcion">Nombre y Apellidos <span class="ast">*</span></label></div>
+                                                    <div class="dato"><label for="LbDescripcion"><?php echo $aIdiomas[$_COOKIE['idioma']]['nomApell']; ?> <span class="ast">*</span></label></div>
                                                     <div class="datoUsu"><input type="text" name="descripcion" id="LbDescripcion"
                                                            placeholder=""></div>
                                                     <div class="error"><?php
@@ -211,7 +212,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <div class="dato"><label for="LbPassword">Contraseña  <span class="ast">*</span></label></div>
+                                                    <div class="dato"><label for="LbPassword"><?php echo $aIdiomas[$_COOKIE['idioma']]['contrasena']; ?>  <span class="ast">*</span></label></div>
                                                     <div class="datoUsu"><input type="password" name="password" id="LbPassword"
                                                            placeholder=""></div>
                                                     <div class="error"><?php
@@ -222,8 +223,8 @@
                                                 </td>
                                             </tr>
                                             <tr class="iniciar buttonForm">
-                                                <th><input id="register" name="register" type="submit" value="Registrarse"></th>
-                                                <th><input id="cancelar" name="cancelar" type="submit" value="Cancelar"></th>
+                                                <th><input id="register" name="register" type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['registro']; ?>"></th>
+                                                <th><input id="cancelar" name="cancelar" type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['cancelar']; ?>"></th>
                                                 <!--<th><a class="volver" href="../indexProyectoLoginLogoutTema5.php">Volver</a></th>-->
                                             </tr>
                                         </table>

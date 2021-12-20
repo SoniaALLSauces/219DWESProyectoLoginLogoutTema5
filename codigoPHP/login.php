@@ -19,6 +19,8 @@
                 exit;
             }
         
+        /* Importamos archivo de idioma */
+            require_once '../core/idiomas.php';  //archivo
             
         /* LOGIN: Importamos archivos necesarios */
             require_once '../config/confDBPDO.php';  //archivo que contiene los parametros de la conexion
@@ -204,18 +206,18 @@
                                     <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                                         <table class="login">
                                             <tr>
-                                                <th colspan="2"><h3>Formulario LogIN</h3></th>
+                                                <th colspan="2"><h3><?php echo $aIdiomas[$_COOKIE['idioma']]['formulario']; ?> LogIN</h3></th>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <div class="dato"><label for="LbUsuario">Usuario <span class="ast">*</span></label></div>
+                                                    <div class="dato"><label for="LbUsuario"><?php echo $aIdiomas[$_COOKIE['idioma']]['usuario']; ?> <span class="ast">*</span></label></div>
                                                     <div class="datoUsu"><input type="text" name="usuario" id="LbUsuario"
                                                            placeholder=""></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <div class="dato"><label for="LbPassword">Contraseña  <span class="ast">*</span></label></div>
+                                                    <div class="dato"><label for="LbPassword"><?php echo $aIdiomas[$_COOKIE['idioma']]['contrasena']; ?>  <span class="ast">*</span></label></div>
                                                     <div class="datoUsu"><input type="password" name="password" id="LbPassword"
                                                            placeholder=""></div>
 
@@ -225,15 +227,15 @@
                                                 <td colspan="2">
                                                     <div class="error"><?php
                                                             if ($aErrores['usuario']!=NULL || $aErrores['password']!=NULL) { //si hay errores muestra el mensaje
-                                                                echo "<span style=\"color:red;\">usuario y/o contraseña incorrecto</span>"; //aparece el mensaje de error que tiene el array aErrores
+                                                                echo "<span style=\"color:red;\">".$aIdiomas[$_COOKIE['idioma']]['error']."</span>"; //aparece el mensaje de error que tiene el array aErrores
                                                             }
                                                          ?></div>
                                                 </td>
                                             </tr>
                                             <tr><td class="vacio"></td></tr>
                                             <tr class="buttonForm">
-                                                <th><input id="login" name="login" type="submit" value="Iniciar Sesion"></th>
-                                                <th><input id="register" name="register" type="submit" value="Registrarse"></th>
+                                                <th><input id="login" name="login" type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['iniciar']; ?>"></th>
+                                                <th><input id="register" name="register" type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['registro']; ?>"></th>
                                             </tr>
                                         </table>
                                     </form>

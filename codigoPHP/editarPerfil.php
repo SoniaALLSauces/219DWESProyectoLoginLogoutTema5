@@ -23,6 +23,7 @@
         /* EDITAR: Importamos archivos necesarios */
             require_once '../config/confDBPDO.php';  //archivo que contiene los parametros de la conexion
             require_once '../core/libreriaValidacion.php'; //libreria Validación para errores
+            require_once '../core/idiomas.php';  //importamos archivo de idioma
 
         /* CONECTO A LA BASE DE DATOS PARA ACCDER A LOS DATOS DEL USUARIO Y MOSTRAR EN EL FORMULARIO */
             try{
@@ -184,12 +185,13 @@
                                        height: 12px;
                                        font-size: 15px;
                                        text-align: right;}
-                                #aceptar, #cancelar, #borrar{width: 85%;
-                                                             border: 2px solid #BF2411;
-                                                             background: #ecaaa1;
-                                                             margin: 5px;
-                                                             padding: 5px ;
-                                                             font-size: 1.5vw;}
+                                #aceptar, #cancelar, 
+                                #borrar, #cambiarCont {width: 85%;
+                                                       border: 2px solid #BF2411;
+                                                       background: #ecaaa1;
+                                                       margin: 5px;
+                                                       padding: 5px ;
+                                                       font-size: 1.5vw;}
                                 .vacio{height: 20px;}
                                 .ast{color: #bb1212;}
                             </style>
@@ -205,11 +207,11 @@
                                     <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                                         <table class="login">
                                             <tr>
-                                                <th colspan="3"><h3>Editar Perfil Usuario</h3></th>
+                                                <th colspan="3"><h3><?php echo $aIdiomas[$_COOKIE['idioma']]['editarUsu']; ?></h3></th>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="dato"><label for="LbUsuario">Usuario </label></div>
+                                                    <div class="dato"><label for="LbUsuario"><?php echo $aIdiomas[$_COOKIE['idioma']]['usuario']; ?> </label></div>
                                                 </td>
                                                 <td colspan="2">
                                                     <div class="datoUsu"><input type="text" name="usuario" id="LbUsuario"
@@ -218,7 +220,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="dato"><label for="LbDescripcion">Nombre y Apellidos <span class="ast">*</span></label></div>
+                                                    <div class="dato"><label for="LbDescripcion"><?php echo $aIdiomas[$_COOKIE['idioma']]['nomApell']; ?> <span class="ast">*</span></label></div>
                                                 </td>
                                                 <td colspan="2">
                                                     <div class="datoUsu"><input type="text" name="descripcion" id="LbDescripcion"
@@ -236,7 +238,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="dato"><label for="LbNumConexiones">Nº de Conexiones </label></div>
+                                                    <div class="dato"><label for="LbNumConexiones"><?php echo $aIdiomas[$_COOKIE['idioma']]['nConexiones']; ?> </label></div>
                                                 </td>
                                                 <td colspan="2">
                                                     <div class="datoUsu"><input type="text" name="numConexiones" id="LbNumConexiones"
@@ -245,7 +247,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="dato"><label for="LbUltConexion">Fecha Ultima Conexión </label></div>
+                                                    <div class="dato"><label for="LbUltConexion"><?php echo $aIdiomas[$_COOKIE['idioma']]['fechaUltConexion']; ?> </label></div>
                                                 </td>
                                                 <td colspan="2">
                                                     <div class="datoUsu"><input type="text" name="ultConexion" id="LbUltConexion"
@@ -254,27 +256,22 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="dato"><label for="LbPerfil">Perfil </label></div>
+                                                    <div class="dato"><label for="LbPerfil"><?php echo $aIdiomas[$_COOKIE['idioma']]['perfil']; ?> </label></div>
                                                 </td>
                                                 <td  colspan="2">
                                                     <div class="datoUsu"><input type="text" name="perfil" id="LbPerfil"
                                                         placeholder="<?php echo $perfil; ?>" disabled=></div>
                                                 </td>
                                             </tr>
-<!--                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="error"><?php
-                                                            if ($aErrores['usuario']!=NULL || $aErrores['password']!=NULL) { //si hay errores muestra el mensaje
-                                                                echo "<span style=\"color:red;\">usuario y/o contraseña incorrecto</span>"; //aparece el mensaje de error que tiene el array aErrores
-                                                            }
-                                                         ?></div>
-                                                </td>
-                                            </tr>-->
+                                            
                                             <tr><td class="vacio"></td></tr>
                                             <tr class="buttonForm">
-                                                <th><input id="aceptar" name="aceptar" type="submit" value="Guardar Cambios"></th>
-                                                <th><input id="borrar" name="borrar" type="submit" value="Eliminar Usuario"></th>
-                                                <th><input id="cancelar" name="cancelar" type="submit" value="Cancelar"></th>
+                                                <th><input id="aceptar" name="aceptar" type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['guardar']; ?>"></th>
+                                                <th><input id="borrar" name="borrar" type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['eliminar']; ?>"></th>
+                                            </tr>
+                                            <tr class="buttonForm">
+                                                <th colspan="2"><input id="cambiarCont" name="cambiarCont" type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['cambiarCont']; ?>"></th>
+                                                <th><input id="cancelar" name="cancelar" type="submit" value="<?php echo $aIdiomas[$_COOKIE['idioma']]['cancelar']; ?>"></th>
                                             </tr>
                                         </table>
                                     </form>

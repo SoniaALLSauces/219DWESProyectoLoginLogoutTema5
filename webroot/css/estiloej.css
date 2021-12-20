@@ -134,8 +134,10 @@ th{
 
 /* Background */
 .main{
-    background-image: url("../images/background-gradient.jpg");
-    background-size: 100%;
+    background-image: url("../images/catBackground.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 .divh2, .divh2>a{
     background: white;

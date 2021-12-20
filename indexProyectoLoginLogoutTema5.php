@@ -21,8 +21,8 @@
                 exit;
             }
         
-        /* Importamos archivos idioma */
-            require_once '../core/idiomas.php';  //archivo
+        /* Importamos archivo de idioma */
+            require_once 'core/idiomas.php';  //archivo
             
 ?>
 
@@ -85,7 +85,7 @@
             </section>
             
             <section class="button">
-                <button><a href="codigoPHP/login.php"><?php echo $aIdiomas['']['inicio']; ?></a></button>
+                <button><a href="codigoPHP/login.php"><?php echo $aIdiomas[$_COOKIE['idioma']]['inicio']; ?></a></button>
             </section>
         </main>
         <footer class="footer">

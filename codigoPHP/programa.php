@@ -8,7 +8,8 @@
 
         /* Importamos archivos necesarios */
             require_once '../config/confDBPDO.php';  //archivo que contiene los parametros de la conexion 
-
+            require_once '../core/idiomas.php';  //importamos archivo de idioma
+                   
         /* INICIO LA SESION */
             session_start();
         
@@ -38,8 +39,7 @@
             .botones{position: relative;
                      float: right;
                      right: 10px;}
-            button{width: 13vw;
-                   height: 60px;
+            button{height: 60px;
                    border: 2px solid #BF2411;
                    background: #ecaaa1;
                    margin: 5px 10px;
@@ -48,7 +48,12 @@
                    vertical-align: middle;}
             div{width: 90%;
                 margin: 8px;}
-            .saludo{margin: 100px;}
+            .saludo{margin: 100px;
+                    padding: 40px;
+                    width: 40vw;
+                    border-radius: 10px;
+                    opacity: 0.5;}
+            .saludo>*{opacity: 1;}
             
         </style>
     </head>
@@ -63,9 +68,9 @@
             </div>
 
             <section class="botones buttonForm">
-                <button><a href="editarPerfil.php">Editar Perfil</a></button>
-                <button><a href="detalle.php">Detalle</a></button>
-                <button><a href='../indexProyectoLoginLogoutTema5.php'>Log Out</a></button>
+                <button><a href="editarPerfil.php"><?php echo $aIdiomas[$_COOKIE['idioma']]['editar']; ?></a></button>
+                <button><a href="detalle.php"><?php echo $aIdiomas[$_COOKIE['idioma']]['detalle']; ?></a></button>
+                <button><a href='../indexProyectoLoginLogoutTema5.php'><?php echo $aIdiomas[$_COOKIE['idioma']]['salir']; ?></a></button>
             </section>
             
             <section class="datos">
@@ -92,14 +97,14 @@
                                 $numConexiones = $consulta -> T01_NumConexiones;
                             
                             echo "<div class='saludo'>";
-                                echo "<h3>HOLA $descUsuario</h3>";
+                                echo "<h3>".$aIdiomas[$_COOKIE['idioma']]['saludo']. " " .$descUsuario. "</h3>";
                                 if ($numConexiones==1){
-                                    echo "<p>Es la PRIMERA vez que se conecta.</p>";
+                                    echo "<p>" .$aIdiomas[$_COOKIE['idioma']]['primeraVez']. "</p>";
                                 } else{
-                                    echo "<p>Es la ".$numConexiones."ª vez que se conecta.</p>";
+                                    echo "<p>".$aIdiomas[$_COOKIE['idioma']]['es'] . $numConexiones . $aIdiomas[$_COOKIE['idioma']]['conecta']. " </p>";
                                     $ultimaConexion = new DateTime();
                                     $ultimaConexionFormat = $ultimaConexion-> setTimestamp($fechaHoraUltimaConexion) -> format ('d-m-Y H:i:s');
-                                    echo "<p>Se conectó por ultima vez el: $ultimaConexionFormat </p>";
+                                    echo "<p>".$aIdiomas[$_COOKIE['idioma']]['ultimaConexion'] . $ultimaConexionFormat. "</p>";
                                 }
                             echo "</div>";
                         }
