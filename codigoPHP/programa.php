@@ -39,12 +39,13 @@
                      float: right;
                      right: 10px;}
             button{width: 13vw;
-                   height: 50px;
+                   height: 60px;
                    border: 2px solid #BF2411;
                    background: #ecaaa1;
                    margin: 5px 10px;
                    padding: 5px 20px;
-                   font-size: 1.8vw;}
+                   font-size: 1.8vw;
+                   vertical-align: middle;}
             div{width: 90%;
                 margin: 8px;}
             .saludo{margin: 100px;}
@@ -62,6 +63,7 @@
             </div>
 
             <section class="botones">
+                <button><a href="editarPerfil.php">Editar Perfil</a></button>
                 <button><a href="detalle.php">Detalle</a></button>
                 <button><a href='../indexProyectoLoginLogoutTema5.php'>Log Out</a></button>
             </section>
@@ -79,7 +81,6 @@
                         try{
                             $miDB = new PDO (HOST, USER, PASSWORD);  //establezco conexión con objeto PDO 
                             $miDB ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //y siempre lanzo excepción utilizando manejador propio PDOException cuando se produce un error
-                            //$codigoDepartamento= $_REQUEST['codDepartamento'];  //variable donde guardo el valor codigo del formulario
                             $sqlUsuario = <<<EOD
                                                SELECT * FROM T01_Usuario WHERE 
                                                T01_CodUsuario='{$usuario}';
