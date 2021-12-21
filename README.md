@@ -6,10 +6,11 @@
 
 **Fecha Inicio Proyecto: 29/11/2021**
 
-**Ultima Actualización: 29/11/2021**
+**Ultima Actualización: 21/12/2021**
 
 ## Descripción 
 Trabajando con Autentificación de Usuarios y Control de Acceso
+Trabajando con sesiones ($_SESSION) y cookies ($_COOKIE)
 
 ## Funcionalidades
 - Establecer conexión a una base de datos
@@ -32,4 +33,4 @@ Trabajando con Autentificación de Usuarios y Control de Acceso
 ### Desarrollo (local)
 -  http://daw219.sauces.local/219DWESProyectoLoginLogoutTema5/indexProyectoLoginLogoutTema5.php
 ### Explotación (local)
--  
+-  https://daw219.ieslossauces.es/219DWESProyectoLoginLogoutTema5/indexProyectoLoginLogoutTema5.php
